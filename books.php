@@ -160,7 +160,7 @@ mysqli_close($conn);
                             </a>
                             <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
                             <div class="btn-group">
-                                <a href="edit.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm" data-tooltip="Könyv szerkesztése">
+                                <a href="edit.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm me-2" data-tooltip="Könyv szerkesztése">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="delete_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a könyvet?');" data-tooltip="Könyv törlése">
