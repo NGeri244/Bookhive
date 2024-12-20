@@ -5,11 +5,11 @@ $page_title = 'Új könyv hozzáadása';
 
 // Check if the user is logged in and is admin
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "admin"){
-    header("location: auth/login.php");
+    header("location: ../auth/login.php");
     exit;
 }
 
-require_once "config/db.php";
+require_once "../config/db.php";
 
 // Define variables and initialize with empty values
 $title = $author = $description = $isbn = $year = $language = $publisher = "";
@@ -61,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_publisher = $publisher;
             
             if(mysqli_stmt_execute($stmt)){
-                header("location: books.php");
+                header("location: ../books/books.php");
                 exit();
             } else{
                 echo "Valami hiba történt. Kérjük próbálja újra később.";
@@ -74,7 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 mysqli_close($conn);
 
-require_once "includes/header.php";
+require_once "../includes/header.php";
 ?>
 
 <div class="card">
@@ -140,7 +140,7 @@ require_once "includes/header.php";
                 <button type="submit" class="btn btn-primary" data-tooltip="Könyv hozzáadása">
                     <i class="fas fa-save me-1"></i>Mentés
                 </button>
-                <a href="books.php" class="btn btn-secondary" data-tooltip="Vissza a könyvek listájához">
+                <a href="../books/books.php" class="btn btn-secondary" data-tooltip="Vissza a könyvek listájához">
                     <i class="fas fa-arrow-left me-1"></i>Vissza
                 </a>
             </div>
@@ -148,4 +148,4 @@ require_once "includes/header.php";
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

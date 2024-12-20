@@ -5,15 +5,15 @@ $page_title = 'Könyv részletei';
 
 // Check if the user is logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: auth/login.php");
+    header("location: ../auth/login.php");
     exit;
 }
 
-require_once "config/db.php";
+require_once "../config/db.php";
 
 // Check if book ID is provided
 if(!isset($_GET["id"]) || empty($_GET["id"])){
-    header("location: books.php");
+    header("location: ../books/books.php");
     exit;
 }
 
@@ -30,7 +30,7 @@ if($stmt = mysqli_prepare($conn, $sql)){
         if(mysqli_num_rows($result) == 1){
             $book = mysqli_fetch_array($result);
         } else {
-            header("location: books.php");
+            header("location: ../books/books.php");
             exit;
         }
     }
@@ -60,7 +60,7 @@ if($stmt = mysqli_prepare($conn, $sql)){
 
 mysqli_close($conn);
 
-require_once "includes/header.php";
+require_once "../includes/header.php";
 ?>
 
 <div class="row">
@@ -73,15 +73,15 @@ require_once "includes/header.php";
                     </h4>
                     <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
                     <div class="btn-group">
-                        <a href="edit_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm" data-tooltip="Könyv szerkesztése">
+                        <a href="/books/edit_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm" data-tooltip="Könyv szerkesztése">
                             <i class="fas fa-edit me-1"></i>Szerkesztés
                         </a>
-                        <a href="delete_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a könyvet?');" data-tooltip="Könyv törlése">
+                        <a href="../books/delete_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a könyvet?');" data-tooltip="Könyv törlése">
                             <i class="fas fa-trash me-1"></i>Törlés
                         </a>
                     </div>
                     <?php elseif(isset($_SESSION["role"]) && $_SESSION["role"] == "user" && $book["status"] == "available"): ?>
-                    <a href="borrow.php?book_id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm" data-tooltip="Könyv kölcsönzése">
+                    <a href="../books/borrows/borrow.php?book_id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm" data-tooltip="Könyv kölcsönzése">
                         <i class="fas fa-hand-holding me-1"></i>Kölcsönzés
                     </a>
                     <?php endif; ?>
@@ -169,4 +169,4 @@ require_once "includes/header.php";
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

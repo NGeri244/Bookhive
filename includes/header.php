@@ -30,24 +30,24 @@ $is_logged_in = isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
                     </li>
                     <?php if($is_logged_in): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'books' ? 'active' : ''; ?>" href="/books.php">
+                        <a class="nav-link <?php echo $current_page === 'books' ? 'active' : ''; ?>" href="/books/books.php">
                             <i class="fas fa-book me-1"></i>Könyvek
                         </a>
                     </li>
                     <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'borrows' ? 'active' : ''; ?>" href="/borrow.php">
+                        <a class="nav-link <?php echo $current_page === 'borrows' ? 'active' : ''; ?>" href="/books/borrows/borrow.php">
                             <i class="fas fa-clipboard-list me-1"></i>Kölcsönzések
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'users' ? 'active' : ''; ?>" href="/users.php">
+                        <a class="nav-link <?php echo $current_page === 'users' ? 'active' : ''; ?>" href="/admin/users.php">
                             <i class="fas fa-users me-1"></i>Felhasználók
                         </a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'my_borrows' ? 'active' : ''; ?>" href="/my_borrows.php">
+                        <a class="nav-link <?php echo $current_page === 'my_borrows' ? 'active' : ''; ?>" href="/books/borrows/my_borrows.php">
                             <i class="fas fa-clipboard-list me-1"></i>Kölcsönzéseim
                         </a>
                     </li>
@@ -62,7 +62,7 @@ $is_logged_in = isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="/logout.php">
+                                <a class="dropdown-item" href="/auth/logout.php">
                                     <i class="fas fa-sign-out-alt me-1"></i>Kijelentkezés
                                 </a>
                             </li>
@@ -70,12 +70,12 @@ $is_logged_in = isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true;
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'login' ? 'active' : ''; ?>" href="/login.php">
+                        <a class="nav-link <?php echo $current_page === 'login' ? 'active' : ''; ?>" href="/auth/login.php">
                             <i class="fas fa-sign-in-alt me-1"></i>Bejelentkezés
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $current_page === 'register' ? 'active' : ''; ?>" href="/register.php">
+                        <a class="nav-link <?php echo $current_page === 'register' ? 'active' : ''; ?>" href="/auth/register.php">
                             <i class="fas fa-user-plus me-1"></i>Regisztráció
                         </a>
                     </li>

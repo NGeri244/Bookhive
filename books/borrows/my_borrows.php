@@ -5,12 +5,12 @@ $page_title = 'Kölcsönzéseim';
 
 // Check if the user is logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: ../auth/login.php");
+    header("location: ../../auth/login.php");
     exit;
 }
 
-require_once "config/db.php";
-require_once "includes/header.php";
+require_once "../../config/db.php";
+require_once "../../includes/header.php";
 
 // Process return book request
 if(isset($_GET["return"]) && !empty($_GET["return"])){
@@ -26,7 +26,7 @@ if(isset($_GET["return"]) && !empty($_GET["return"])){
                 mysqli_stmt_bind_param($stmt, "i", $_GET["return"]);
                 mysqli_stmt_execute($stmt);
             }
-            header("location: my_borrows.php");
+            header("location: ../borrows/my_borrows.php");
             exit();
         }
         mysqli_stmt_close($stmt);
@@ -125,7 +125,7 @@ mysqli_close($conn);
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="my_borrows.php?return=<?php echo $borrow["id"]; ?>" class="btn btn-success btn-sm" onclick="return confirm('Biztosan visszahozza a könyvet?');" data-tooltip="Könyv visszahozása">
+                                            <a href="/books/borrows/my_borrows.php?return=<?php echo $borrow["id"]; ?>" class="btn btn-success btn-sm" onclick="return confirm('Biztosan visszahozza a könyvet?');" data-tooltip="Könyv visszahozása">
                                                 <i class="fas fa-check me-1"></i>Visszahozás
                                             </a>
                                         </td>
@@ -175,4 +175,4 @@ mysqli_close($conn);
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../../includes/footer.php"; ?> 

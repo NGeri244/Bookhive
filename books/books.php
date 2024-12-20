@@ -9,8 +9,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-require_once "config/db.php";
-require_once "includes/header.php";
+require_once "../config/db.php";
+require_once "../includes/header.php";
 
 // Initialize search variables
 $search_title = $search_author = "";
@@ -82,7 +82,7 @@ mysqli_close($conn);
                     <i class="fas fa-search me-2"></i>Könyvek keresése
                 </h4>
                 <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
-                <a href="add_book.php" class="btn btn-primary btn-sm" data-tooltip="Új könyv hozzáadása">
+                <a href="../books/add_book.php" class="btn btn-primary btn-sm" data-tooltip="Új könyv hozzáadása">
                     <i class="fas fa-plus me-1"></i>Új könyv
                 </a>
                 <?php endif; ?>
@@ -155,15 +155,15 @@ mysqli_close($conn);
                             <?php echo htmlspecialchars(substr($book["description"], 0, 150)) . "..."; ?>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm" data-tooltip="Könyv részletei">
+                            <a href="../books/view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm" data-tooltip="Könyv részletei">
                                 <i class="fas fa-info-circle me-1"></i>Részletek
                             </a>
                             <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
                             <div class="btn-group">
-                                <a href="edit.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm" data-tooltip="Könyv szerkesztése">
+                                <a href="/books/edit_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-warning btn-sm me-2" data-tooltip="Könyv szerkesztése">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="delete_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a könyvet?');" data-tooltip="Könyv törlése">
+                                <a href="../books/delete_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a könyvet?');" data-tooltip="Könyv törlése">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
@@ -176,4 +176,4 @@ mysqli_close($conn);
     <?php endif; ?>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

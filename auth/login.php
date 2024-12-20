@@ -7,11 +7,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
 }
 
-$current_page = 'login';
-$page_title = 'Bejelentkezés';
-
-require_once "config/db.php";
-require_once "includes/header.php";
+require_once "../config/db.php";
 
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
@@ -80,53 +76,93 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="text-center mb-0">
-                    <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
-                </h3>
-            </div>
-            <div class="card-body">
-                <?php 
-                if(!empty($login_err)){
-                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-circle me-2"></i>' . $login_err . '
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>';
-                }        
-                ?>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <div class="form-group mb-3">
-                        <label>
-                            <i class="fas fa-user me-2"></i>Felhasználónév
-                        </label>
-                        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" data-tooltip="Adja meg a felhasználónevét">
-                        <span class="invalid-feedback"><?php echo $username_err; ?></span>
-                    </div>    
-                    <div class="form-group mb-3">
-                        <label>
-                            <i class="fas fa-lock me-2"></i>Jelszó
-                        </label>
-                        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" data-tooltip="Adja meg a jelszavát">
-                        <span class="invalid-feedback"><?php echo $password_err; ?></span>
-                    </div>
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-block w-100" data-tooltip="Kattintson a bejelentkezéshez">
-                            <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
-                        </button>
-                    </div>
-                    <p class="text-center mt-3">
-                        Még nincs fiókja? 
-                        <a href="register.php" class="text-decoration-none" data-tooltip="Hozzon létre új fiókot">
-                            <i class="fas fa-user-plus me-1"></i>Regisztráljon itt
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés - BookHive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../index.php">
+                <i class="fas fa-book-reader me-2"></i>BookHive
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../auth/login.php">
+                            <i class="fas fa-sign-in-alt me-1"></i>Bejelentkezés
                         </a>
-                    </p>
-                </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../auth/register.php">
+                            <i class="fas fa-user-plus me-1"></i>Regisztráció
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center mb-0">
+                            <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <?php 
+                        if(!empty($login_err)){
+                            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-exclamation-circle me-2"></i>' . $login_err . '
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>';
+                        }        
+                        ?>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <div class="form-group mb-3">
+                                <label>
+                                    <i class="fas fa-user me-2"></i>Felhasználónév
+                                </label>
+                                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" data-tooltip="Adja meg a felhasználónevét">
+                                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                            </div>    
+                            <div class="form-group mb-3">
+                                <label>
+                                    <i class="fas fa-lock me-2"></i>Jelszó
+                                </label>
+                                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" data-tooltip="Adja meg a jelszavát">
+                                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary btn-block w-100" data-tooltip="Kattintson a bejelentkezéshez">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
+                                </button>
+                            </div>
+                            <p class="text-center mt-3">
+                                Még nincs fiókja? 
+                                <a href="../auth/register.php" class="text-decoration-none" data-tooltip="Hozzon létre új fiókot">
+                                    <i class="fas fa-user-plus me-1"></i>Regisztráljon itt
+                                </a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php require_once "includes/footer.php"; ?> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
