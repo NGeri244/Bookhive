@@ -9,7 +9,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION[
     exit;
 }
 
-require_once "config/db.php";
+require_once "../config/db.php";
 
 // Define variables and initialize with empty values
 $title = $author = $description = $isbn = $year = $language = $publisher = "";
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_id = $_POST["id"];
             
             if(mysqli_stmt_execute($stmt)){
-                header("location: view_book.php?id=".$_POST["id"]);
+                header("location: ../books/view_book.php?id=".$_POST["id"]);
                 exit();
             } else{
                 echo "Valami hiba történt. Kérjük próbálja újra később.";
@@ -97,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $language = $row["language"];
                     $publisher = $row["publisher"];
                 } else{
-                    header("location: books.php");
+                    header("location: ../books/books.php");
                     exit();
                 }
             } else{
@@ -107,14 +107,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     } else{
-        header("location: books.php");
+        header("location: ../books/books.php");
         exit();
     }
 }
 
 mysqli_close($conn);
 
-require_once "includes/header.php";
+require_once "../includes/header.php";
 ?>
 
 <div class="card">
@@ -181,7 +181,7 @@ require_once "includes/header.php";
                 <button type="submit" class="btn btn-primary" data-tooltip="Módosítások mentése">
                     <i class="fas fa-save me-1"></i>Mentés
                 </button>
-                <a href="view_book.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-secondary" data-tooltip="Vissza a könyv adatlapjára">
+                <a href="../books/view_book.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-secondary" data-tooltip="Vissza a könyv adatlapjára">
                     <i class="fas fa-arrow-left me-1"></i>Vissza
                 </a>
             </div>
@@ -189,4 +189,4 @@ require_once "includes/header.php";
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

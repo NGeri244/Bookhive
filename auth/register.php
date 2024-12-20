@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
 }
 
-require_once "config/db.php";
+require_once "../config/db.php";
 
 $username = $password = $confirm_password = $name = "";
 $username_err = $password_err = $confirm_password_err = $name_err = "";
@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_name = $name;
             
             if(mysqli_stmt_execute($stmt)){
-                header("location: login.php");
+                header("location: ../auth/login.php");
             } else{
                 echo "Hiba történt. Kérjük próbálja újra később.";
             }
@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($conn);
 }
 
-require_once "includes/header.php";
+require_once "../includes/header.php";
 ?>
 
 <div class="row justify-content-center">
@@ -139,7 +139,7 @@ require_once "includes/header.php";
                     </div>
                     <p class="text-center mt-3">
                         Már van fiókja? 
-                        <a href="/login.php" class="text-decoration-none" data-tooltip="Jelentkezzen be meglévő fiókjával">
+                        <a href="../auth/login.php" class="text-decoration-none" data-tooltip="Jelentkezzen be meglévő fiókjával">
                             <i class="fas fa-sign-in-alt me-1"></i>Jelentkezzen be itt
                         </a>
                     </p>
@@ -149,4 +149,4 @@ require_once "includes/header.php";
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

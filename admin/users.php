@@ -9,8 +9,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION[
     exit;
 }
 
-require_once "config/db.php";
-require_once "includes/header.php";
+require_once "../config/db.php";
+require_once "../includes/header.php";
 
 // Process role change
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"]) && isset($_POST["new_role"])){
@@ -97,7 +97,7 @@ mysqli_close($conn);
                                             <i class="fas fa-exchange-alt"></i>
                                         </button>
                                     </form>
-                                    <a href="delete_user.php?id=<?php echo $user["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a felhasználót?');" data-tooltip="Felhasználó törlése">
+                                    <a href="../admin/delete_user.php?id=<?php echo $user["id"]; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretné ezt a felhasználót?');" data-tooltip="Felhasználó törlése">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -111,4 +111,4 @@ mysqli_close($conn);
     </div>
 </div>
 
-<?php require_once "includes/footer.php"; ?> 
+<?php require_once "../includes/footer.php"; ?> 

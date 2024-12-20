@@ -60,7 +60,7 @@ mysqli_close($conn);
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../index.php">
                 <i class="fas fa-book-reader me-2"></i>BookHive
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -69,30 +69,30 @@ mysqli_close($conn);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">
+                        <a class="nav-link active" href="../index.php">
                             <i class="fas fa-home me-1"></i>Kezdőlap
                         </a>
                     </li>
                     <?php if($is_logged_in): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="books.php">
+                        <a class="nav-link" href="/books/books.php">
                             <i class="fas fa-book me-1"></i>Könyvek
                         </a>
                     </li>
                     <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/borrow.php">
+                        <a class="nav-link" href="/books/borrows/borrow.php">
                             <i class="fas fa-clipboard-list me-1"></i>Kölcsönzések
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users.php">
+                        <a class="nav-link" href="/admin/users.php">
                             <i class="fas fa-users me-1"></i>Felhasználók
                         </a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/my_borrows.php">
+                        <a class="nav-link" href="/books/borrows/my_borrows.php">
                             <i class="fas fa-clipboard-list me-1"></i>Kölcsönzéseim
                         </a>
                     </li>
@@ -107,7 +107,7 @@ mysqli_close($conn);
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="/logout.php">
+                                <a class="dropdown-item" href="/auth/logout.php">
                                     <i class="fas fa-sign-out-alt me-1"></i>Kijelentkezés
                                 </a>
                             </li>
@@ -115,12 +115,12 @@ mysqli_close($conn);
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login.php">
+                        <a class="nav-link" href="/auth/login.php">
                             <i class="fas fa-sign-in-alt me-1"></i>Bejelentkezés
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register.php">
+                        <a class="nav-link" href="/auth/register.php">
                             <i class="fas fa-user-plus me-1"></i>Regisztráció
                         </a>
                     </li>
@@ -142,10 +142,10 @@ mysqli_close($conn);
                         </h1>
                         <p class="lead mb-4">Böngésszen könyveink között és kezelje kölcsönzéseit online.</p>
                         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                            <a href="login.php" class="btn btn-primary btn-lg px-4 gap-3" data-tooltip="Jelentkezzen be fiókjába">
+                            <a href="/auth/login.php" class="btn btn-primary btn-lg px-4 gap-3" data-tooltip="Jelentkezzen be fiókjába">
                                 <i class="fas fa-sign-in-alt me-2"></i>Bejelentkezés
                             </a>
-                            <a href="register.php" class="btn btn-outline-primary btn-lg px-4" data-tooltip="Hozzon létre új fiókot">
+                            <a href="/auth/register.php" class="btn btn-outline-primary btn-lg px-4" data-tooltip="Hozzon létre új fiókot">
                                 <i class="fas fa-user-plus me-2"></i>Regisztráció
                             </a>
                         </div>
@@ -184,7 +184,7 @@ mysqli_close($conn);
                                                     <?php echo htmlspecialchars(substr($book["description"], 0, 100)) . "..."; ?>
                                                 </p>
                                                 <?php if($is_logged_in): ?>
-                                                <a href="/view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm">
+                                                <a href="/books/view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm">
                                                     <i class="fas fa-info-circle me-1"></i>Részletek
                                                 </a>
                                                 <?php else: ?>
@@ -227,7 +227,7 @@ mysqli_close($conn);
                                                 <i class="fas fa-user me-1"></i><?php echo htmlspecialchars($book["author"]); ?>
                                             </small>
                                         </p>
-                                        <a href="/view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm mt-2">
+                                        <a href="/books/view_book.php?id=<?php echo $book["id"]; ?>" class="btn btn-primary btn-sm mt-2">
                                             <i class="fas fa-info-circle me-1"></i>Részletek
                                         </a>
                                     </div>

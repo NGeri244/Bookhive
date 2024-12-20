@@ -3,17 +3,17 @@ session_start();
 
 // Check if the user is logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+    header("location: ../../auth/login.php");
     exit;
 }
 
 // For non-admin users, only allow direct book borrowing
 if($_SESSION["role"] !== "admin" && !isset($_GET["book_id"])) {
-    header("location: index.php");
+    header("location: ../../index.php");
     exit;
 }
 
-require_once "config/db.php";
+require_once "../../config/db.php";
 
 // Process return book
 if(isset($_GET["return"]) && !empty($_GET["return"])){
@@ -24,7 +24,7 @@ if(isset($_GET["return"]) && !empty($_GET["return"])){
         $param_id = $_GET["return"];
         
         if(mysqli_stmt_execute($stmt)){
-            header("location: books.php");
+            header("location: /books/borrows/borrow.php");
             exit();
         }
         mysqli_stmt_close($stmt);
@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         mysqli_stmt_bind_param($stmt, "iis", $book_id, $user_id, $return_date);
         
         if(mysqli_stmt_execute($stmt)){
-            header("location: books.php");
+            header("location: /books/borrows/borrow.php");
             exit();
         }
         mysqli_stmt_close($stmt);
@@ -108,7 +108,7 @@ if(isset($_GET["book_id"]) && !empty($_GET["book_id"])) {
                                 mysqli_stmt_bind_param($stmt, "i", $book_id);
                                 mysqli_stmt_execute($stmt);
                             }
-                            header("location: view_book.php?id=" . $book_id);
+                            header("location: ../view_book.php?id=" . $book_id);
                             exit();
                         }
                     }
@@ -116,7 +116,7 @@ if(isset($_GET["book_id"]) && !empty($_GET["book_id"])) {
             }
         }
     }
-    header("location: view_book.php?id=" . $book_id . "&error=1");
+    header("location: ../view_book.php?id=" . $book_id . "&error=1");
     exit();
 }
 
@@ -131,12 +131,12 @@ mysqli_close($conn);
     <title>Kölcsönzések - BookHive</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../../index.php">
                 <i class="fas fa-book-reader me-2"></i>BookHive
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -145,12 +145,12 @@ mysqli_close($conn);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">
+                        <a class="nav-link" href="../../index.php">
                             <i class="fas fa-home me-1"></i>Kezdőlap
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="books.php">
+                        <a class="nav-link" href="../books.php">
                             <i class="fas fa-book me-1"></i>Könyvek
                         </a>
                     </li>
@@ -160,7 +160,7 @@ mysqli_close($conn);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="users.php">
+                        <a class="nav-link" href="../../admin/users.php">
                             <i class="fas fa-users me-1"></i>Felhasználók
                         </a>
                     </li>
@@ -172,7 +172,7 @@ mysqli_close($conn);
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="../auth/logout.php">
+                                <a class="dropdown-item" href="../../auth/logout.php">
                                     <i class="fas fa-sign-out-alt me-1"></i>Kijelentkezés
                                 </a>
                             </li>
@@ -231,7 +231,7 @@ mysqli_close($conn);
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <a href="borrow.php?return=<?php echo $borrow["id"]; ?>" class="btn btn-success btn-sm" data-tooltip="Könyv visszavétele">
+                                                    <a href="../borrows/borrow.php?return=<?php echo $borrow["id"]; ?>" class="btn btn-success btn-sm" data-tooltip="Könyv visszavétele">
                                                         <i class="fas fa-check me-1"></i>Visszavétel
                                                     </a>
                                                 </td>
